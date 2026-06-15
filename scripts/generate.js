@@ -1,15 +1,33 @@
 const fs=require('fs'),path=require('path'),today=new Date().toISOString().slice(0,10),slug=today;
-const feed=JSON.parse(fs.readFileSync(path.join(__dirname,'..','feed.json'),'utf8'));
-if(feed.posts.find(p=>p.slug===slug)){console.log('Exists');process.exit(0)}
-const articles=[
-{title:'为什么你总是三分钟热度？不是意志力问题，是方法错了',tag:'习惯养成',intro:'每次下定决心要改变，热血三天就回到原样。你以为是意志力不够，其实是方法不对。真正的改变不靠咬牙坚持，而是靠聪明的系统设计。',sections:[{title:'🧠 意志力是有限的资源',body:'心理学实验证实：意志力像肌肉会疲劳。每天做几百个小决定（穿什么、吃什么、回什么消息）消耗大量意志力——到了晚上就崩溃了。所以不要靠意志力来改变习惯。聪明的做法是：减少需要意志力的场景，让好习惯变得\"容易做\"，坏习惯变得\"难做\"。'},{title:'📉 把目标降到小得可笑的程度',body:'想每天运动？从每天做一个俯卧撑开始。想多读书？从每天读一页开始。这听起来太少了，但它的关键在于：当目标小到不需要意志力的时候，你会真正开始做。而一旦开始做了，往往会多做一点——做一个俯卧撑后会想反正都做了多做几个。这就是\"最小行动法则\"。'},{title:'🏗 习惯绑定和环境设计',body:'把想养成的新习惯绑在已有习惯上：每天刷牙后（已有习惯）做一分钟拉伸（新习惯）。改变环境比改变自己容易：想少吃零食就不要买回家、想多看书就把手机放另一个房间床头放书、想早睡就把充电器放卧室外面。一个设计好的环境，胜过一万次咬牙坚持。'}]},
-{title:'普通人的副业指南：从0到1的5个可行方向',tag:'副业赚钱',intro:'不是让你辞职创业。利用业余时间慢慢积累，从每月多赚几百到几千。这几条副业路都是普通人实操验证过的，不需要多厉害的专业技能。',sections:[{title:'✍️ 内容创作',body:'写公众号/做小红书/做短视频，选一个你最熟悉的领域。不需要成为专家，只要比你目标读者多懂一点就行。比如你菜做得好，就拍做菜教程；你家收纳整洁，就分享收纳方法。关键在于持续输出——每天发一篇，坚持3个月再谈效果。前3个月零收入是正常的，这是积累期。'},{title:'🛒 闲鱼卖货',body:'不是让你进货囤货。最简单的模式：在拼多多/1688找到便宜好用的东西，加价5-20元挂闲鱼。有人买你再去下单直发他。不需要自己发货、不用囤货、零成本。选品方向：家居收纳工具、手机配件、学生文具。每天花1小时上架+回复，一个月多赚1000-3000是合理的。'},{title:'📖 把你的经验打包成产品',body:'你会的任何东西都可以是产品。会做PPT→模板包，会写简历→简历模板，会做菜→菜谱合集。用飞书文档/Notion整理成电子手册，挂小红书店铺卖9.9-29.9元。一次做好，无限次卖。有一个人靠卖自己整理的\"外企面试英文话术\"月入5000+——而这些东西本身就在她日常工作里，整理出来就值钱了。'},{title:'💻 技能接单',body:'会修图→接修图单、会录配音→接配音单、会翻译→接翻译单。接单平台：猪八戒网、一品威客、淘宝找\"XX代做\"看别人怎么做的。一开始定价低一些积累评价，服务做好了老客户会复购和转介绍。不要想太复杂：你习以为常的技能，在别人眼里是\"太难了\"，愿意花钱请你做。'}]},
-{title:'怎样提升自信？不是变完美了才自信，是先自信才能变好',tag:'心理成长',intro:'自信不是成功的结果，是成功的前提。很多人想错了——以为等自己够好了就会自信。事实是：自信是一种能力，可以刻意练习。',sections:[{title:'🎯 自信的来源是什么',body:'自信不来自\"我很厉害\"，来自\"我相信自己能处理\"。自信的人不是不害怕，是害怕但仍然行动。自信基于经验证据——你做成过一件事，下次就更相信自己能做成了。所以最有效的培养自信方式是：从最小的可完成的事情做起，积攒\"我能\"的证据。'},{title:'📋 建立自信的实操方法',body:'每天写下3件\"今天我做得很好的事\"，不管多小都可以（准时起床、把碗洗了、回复了不敢回的消息）。坚持一周你就会发现自己原来每天都在做一些很棒的事。另外：列出你过去克服过的困难，每次怀疑自己时拿出来看——这些都是你\"可以做到\"的确凿证据。'},{title:'🚫 停止比较',body:'自信最大的杀手是和别人比较。社交媒体上看到的是别人精心剪辑的高光时刻，你拿自己的日常去比当然输。你唯一该比较的人，是昨天的自己。今天比昨天多看了一页书、多运动了10分钟、多给了一个微笑——你就是进步的。关掉朋友圈、取关让你焦虑的博主，自信心会回来很多。'}]},
-{title:'每天最重要的2小时：高效能人士的高产法则',tag:'效率提升',intro:'高效不是把每分每秒都填满。真正的高效能人士知道：一天中真正能产出高质量成果的，只有大概2小时。找到这2小时并保护好它。',sections:[{title:'🕐 找到你的黄金2小时',body:'每个人一天中精力最好的时间段不同。有的人早上清醒，有的人深夜灵感爆棚。花一周记录自己的精力波动（用1-10打分每小时记录一次），找到精力在8分以上的时间段。这段时间就是你的黄金时间——用来做最重要、最需要脑力的工作。其他时间用来做不需要太多脑力的事（回邮件、开会、整理文件）。'},{title:'🛡 保护黄金时间',body:'黄金时间不接电话、不回消息、不见客。关掉所有通知——微信、邮件、Slack全部静音。把手机放另一个房间。提前和家人/同事沟通：\"每天9-11点是我深度工作的时间，这个时间请勿打扰除非紧急。\"大部分\"紧急\"的事情其实不急，2小时后再处理完全来得及。'},{title:'⚡ 高能量输出方法',body:'在黄金时间之前：不喝咖啡（咖啡会制造虚假的精力感然后让你crash）、吃一份高蛋白的早餐稳定血糖、做5分钟拉伸或快走激活身体。进入工作状态时：先做最重要的任务（\"先吃青蛙\"），把消耗意志力的决策放在黄金时间，好钢用在刀刃上。'}]},
+const fp=path.join(__dirname,'..','feed.json');
+const feed=JSON.parse(fs.readFileSync(fp,'utf8'));
+if(!feed.posts)feed.posts=[];
+if(feed.posts.find(p=>p.slug===slug)){console.log('Already exists');process.exit(0)}
+
+// Content pools - 8 groups cycling through dates
+const pools=[
+[{t:'效率翻倍！这3个小技巧让你的工作流更顺畅',tag:'效率技巧',d:'减少切换、批处理、自动化——3个简单技巧立刻提升效率'}],
+[{t:'2026年必备的免费工具推荐',tag:'工具推荐',d:'精心挑选的实用免费工具，日常办公和创作都能用上'}],
+[{t:'为什么你总觉得时间不够用？',tag:'时间管理',d:'不是你不够努力，而是方法需要调整。重新规划你的时间分配'}],
+[{t:'工作学习两不误的小窍门',tag:'学习方法',d:'高效人士都在用的学习方法，每天只需投入少量时间'}],
+[{t:'比勤奋更重要的是方法',tag:'思维方式',d:'换个角度思考问题，可能会发现之前困扰你的事其实很简单'}],
+[{t:'减少决策疲劳的日常习惯',tag:'习惯养成',d:'每天做太多小决定会消耗精力，建立习惯让大脑自动运行'}],
+[{t:'让生活更有条理的整理术',tag:'生活技巧',d:'整理不只是打扫房间，更是整理思绪和提升幸福感的方式'}],
+[{t:'数字时代如何保持专注',tag:'专注力',d:'手机和社交媒体在偷走你的注意力，教你几招夺回主动权'}],
 ];
-const idx=(new Date().getDate()-1)%articles.length,a=articles[idx];
-feed.posts.unshift({slug,date:today,title:a.title,tag:a.tag,intro:a.intro,sections:a.sections});
-feed.updated=today;fs.writeFileSync(path.join(__dirname,'..','feed.json'),JSON.stringify(feed,null,2));
-const html=`<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>${a.title} - 个人成长</title><meta name="description" content="${a.intro}"><style>*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}:root{--bg:#fafafa;--card:#fff;--text:#1a1a2e;--t2:#555;--accent:#dc2626;--border:#e5e7eb;--r:12px}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.9;font-size:16px}.container{max-width:750px;margin:0 auto;padding:0 20px}header{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;padding:36px 0;margin-bottom:24px}header a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.9rem}header h1{font-size:1.5rem;margin-top:8px;line-height:1.4}.post{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:32px}.post .intro{font-size:1rem;color:var(--t2);margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border);line-height:1.8}.section{margin-bottom:24px}.section h3{font-size:1.05rem;margin-bottom:6px;color:var(--accent)}.section p{color:var(--t2);font-size:.92rem;line-height:1.9}footer{text-align:center;padding:24px;color:#999;font-size:.75rem}@media(max-width:600px){.post{padding:18px}}</style></head><body><header><div class="container"><a href="../index.html">← 首页</a><h1>${a.title}</h1></div></header><main class="container"><article class="post"><p class="intro">${a.intro}</p>${a.sections.map(s=>`<div class="section"><h3>${s.title}</h3><p>${s.body}</p></div>`).join('')}</article></main><footer><p>📈 个人成长 · 每日更新</p></footer></body></html>`;
-fs.writeFileSync(path.join(__dirname,'..','posts',slug+'.html'),html);
-console.log('OK');
+
+const idx=(new Date().getDate()-1)%pools.length;
+const pool=pools[idx];
+const titles=['每日分享 | '+today,'实用技巧 | '+today,'效率提升 | '+today,'好物推荐 | '+today];
+const title=titles[new Date().getDate()%titles.length];
+
+feed.posts.unshift({slug,date:today,title:title,items:pool});
+feed.updated=today;
+fs.writeFileSync(fp,JSON.stringify(feed,null,2));
+
+// Create post HTML
+const dir=path.join(__dirname,'..','posts');
+if(!fs.existsSync(dir))fs.mkdirSync(dir,{recursive:true});
+const h=`<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>${title}</title><meta name="description" content="${pool.map(i=>i.t).join('、')}"><style>body{font:16px -apple-system,sans-serif;background:#fafafa;color:#1a1a2e;line-height:1.8;margin:0;padding:16px}.c{max-width:700px;margin:0 auto}article{background:#fff;padding:24px;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.05)}h1{font-size:1.3rem;margin:0 0 4px}.date{font-size:.8rem;color:#666;margin-bottom:20px}.item{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #eee}.item h2{font-size:1rem;margin:0 0 4px}.item p{font-size:.88rem;color:#555}.tag{display:inline-block;background:#eff6ff;color:#2563eb;font-size:.68rem;padding:2px 8px;border-radius:10px;margin-left:6px}footer{text-align:center;padding:20px;color:#999;font-size:.72rem}</style></head><body><div class="c"><article><h1>${title}</h1><p class="date">📅 ${today}</p>${pool.map(i=>'<div class="item"><h2>'+i.t+' <span class="tag">'+i.tag+'</span></h2><p>'+i.d+'</p></div>').join('')}</article></div><footer>每日自动更新</footer></body></html>`;
+fs.writeFileSync(path.join(dir,slug+'.html'),h);
+console.log('Generated:',title);
